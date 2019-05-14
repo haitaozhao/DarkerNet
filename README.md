@@ -1,3 +1,6 @@
+# DarkerNet
+Based on Darknet.
+
 ## Required
 1. [OpenCV(3.4.6)](https://github.com/opencv/opencv/releases)
     ``` shell
@@ -56,13 +59,7 @@
     Cuda compilation tools, release 9.0, V9.0.176
 
     cd ~/NVIDIA_CUDA-9.0_Samples/0_Simple/matrixMul
-    make
-    "/usr/local/cuda-9.0"/bin/nvcc -ccbin g++ -I../../common/inc  -m64    -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_70,code=compute_70 -o matrixMul.o -c matrixMul.cu
-    "/usr/local/cuda-9.0"/bin/nvcc -ccbin g++   -m64      -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_70,code=compute_70 -o matrixMul matrixMul.o 
-    mkdir -p ../../bin/x86_64/linux/release
-    cp matrixMul ../../bin/x86_64/linux/release
-    
-    ./matrixMul 
+    make && ./matrixMul 
     [Matrix Multiply Using CUDA] - Starting...
     GPU Device 0: "GeForce GT 730M" with compute capability 3.5
 
@@ -85,7 +82,8 @@
 
 ## Updates
 
-- May  6th, 2019: add `resize_connected_layer`.
-- May 10th, 2019: add `prelu`.
-- May 12th, 2019: add `print_network_weights`, `layer_type_to_string`.
-- May 13th, 2019: CUDA supported; add `prelu_layer_kernel.cu`, `clip_cpu/gpu`,
+- 2019.05.06: add `resize_connected_layer`.
+- 2019.05.10: add `prelu`.
+- 2019.05.11: OpenBLAS supported.
+- 2019.05.12: add `print_network_weights`, `layer_type_to_string`.
+- 2019.05.13: CUDA supported; add `prelu_layer_kernel.cu`, `clip_cpu/gpu`,
