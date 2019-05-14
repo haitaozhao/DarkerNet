@@ -27,11 +27,11 @@ int main(int argc, char **argv)
     }
     print_feature_map(X.data, 3, 3, 10);
 
-    network* net = load_network("prelu.cfg", 0, 0);
-    for (int i = 0; i<5; i++ ){
-        net->layers[0].weights[i] = 0.1*(i+1);
-    }
-
+    network* net = load_network("prelu.cfg", "prelu.weights", 0);
+    for (int i = 0; i<5; i++ )
+        printf("%f ", net->layers[0].weights[i]);
+    printf("\n\n");
+    
     network_predict(net, X.data);
     print_feature_map(net->layers[0].output, 3, 3, 10);
 
