@@ -12,12 +12,12 @@ extern "C" {
 __global__ void forward_prelu_layer_kernel(int n, int w, int h, int c, int g, float *input, float *weights, float *output)
 {
     int id = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
-    if (id >= n) return;    // 所有通道索引
+    if (id >= n) return;            // 所有通道索引
 
-    int k = id % c;         // 某张量通道索引
+    int k = id % c;                 // 某张量通道索引
     float alpha = weights[k / g];
 
-    // printf("id: %d, k: %d, g: %d, alpha: %f\n", id, k, g, alpha);
+    printf("id: %d, k: %d, g: %d, alpha: %f\n", id, k, g, alpha);
     
     for(int i = 0; i < h*w; ++i){
         int idx = i + h*w * id;
