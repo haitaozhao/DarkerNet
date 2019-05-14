@@ -34,17 +34,13 @@ extern "C" void  forward_prelu_layer_gpu(const layer l, network net)
 #endif
 
 #if 0
-
 __global__ void prelu_kernel(float *input, float *output, float *alpha, int c, int n, int size)
 {
     int offset = blockIdx.x * blockDim.x + threadIdx.x; // 像素索引
     int filter = blockIdx.y;    // 通道索引
     int batch = blockIdx.z;     // 数据索引
-    int idx_n = filter % n;
+    int idx_n = filter / n;
     int index = (batch*c+filter)*size + offset;
-
-    if (batch==0)
-        printf("offset: %d, filter: %d, alpha: %f\n", offset, filter, alpha[idx_n]);
 
     if(offset < size)
         output[index] = input[index] < 0 ? input[index]*alpha[idx_n] : input[index];
@@ -61,10 +57,8 @@ extern "C" void prelu_gpu(float *input, float *output, float *alpha, int batch, 
 
 extern "C" void forward_prelu_layer_gpu(layer l, network net){
     fill_gpu(l.outputs*l.batch, 0, l.output_gpu, 1);
-    prelu_gpu(net.input_gpu, l.output_gpu, l.weights_gpu, l.batch, l.c, l.n, l.w*l.h);
+    prelu_gpu(net.input_gpu, l.output_gpu, l.weights_gpu, l.batch, l.c, l.groups, l.w*l.h);
 }
-
-
 #endif
 
 void  backward_prelu_layer_gpu(layer l, network net)
