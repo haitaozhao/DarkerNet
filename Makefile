@@ -3,7 +3,7 @@ CUDNN=1
 OPENCV=1
 OPENBLAS=1
 OPENMP=0
-DEBUG=0
+DEBUG=1
 
 ARCH= -gencode arch=compute_30,code=sm_30 \
       -gencode arch=compute_35,code=sm_35 \
@@ -74,7 +74,7 @@ endif
 OBJS = $(addprefix $(OBJDIR), $(OBJ))
 DEPS = $(wildcard src/*.h) Makefile include/darknet.h
 
-all: obj backup results $(SLIB) $(ALIB)
+all: obj backup results $(SLIB) $(ALIB) 
 
 $(ALIB): $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
@@ -99,7 +99,18 @@ results:
 	mkdir -p results
 
 .PHONY: clean
-
 clean:
 	rm -rf $(OBJS) $(SLIB) $(ALIB) $(OBJDIR)/*
 
+PREFIX = /usr/local/darknet
+.PHONY: install
+install:
+	mkdir ${PREFIX}
+	cp -r include/ ${PREFIX}
+	cp -r src/ ${PREFIX}
+	mkdir ${PREFIX}/lib
+	cp libdarknet* ${PREFIX}/lib/
+
+.PHONY: uninstall
+uninstall:
+	rm -rf ${PREFIX}
