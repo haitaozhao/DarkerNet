@@ -16,15 +16,11 @@ __global__ void forward_prelu_layer_kernel(int n, int w, int h, int c, int g, fl
 
     int k = id % c;                 // 某张量通道索引
     float alpha = weights[k / g];
-
-    printf("id: %d, k: %d, g: %d, alpha: %f\n", id, k, g, alpha);
     
     for(int i = 0; i < h*w; ++i){
         int idx = i + h*w * id;
         float val = input[idx];
         output[idx] = val < 0? alpha*val: val;
-
-        // printf("id: %d, idx: %d, h: %d, w: %d, val: %f, alpha: %f, activated: %f\n", id, idx, h, w, input[idx], alpha, output[idx]);
     }
 }
 
