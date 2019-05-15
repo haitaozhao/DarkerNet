@@ -801,6 +801,7 @@ void forward_network_gpu(network *netp)
         }
         l.forward_gpu(l, net);
         net.input_gpu = l.output_gpu;
+        // cuda_pull_array(l.output_gpu, l.output, l.outputs*l.batch);
         net.input = l.output;
         if(l.truth) {
             net.truth_gpu = l.output_gpu;
