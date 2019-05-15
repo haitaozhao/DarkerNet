@@ -1157,7 +1157,7 @@ void pull_network_output(network *net)
 void print_memory(float* ptr, int n)
 {
     int i = 0;
-    for (i == 0; i < n; i++ ){
+    for (i = 0; i < n; i++ ){
         fprintf(stderr, "%.4f ", ptr[i]);
     }
         fprintf(stderr, "\n");
