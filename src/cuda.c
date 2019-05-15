@@ -33,7 +33,7 @@ void check_error(cudaError_t status)
     {   
         const char *s = cudaGetErrorString(status);
         char buffer[256];
-        printf("CUDA Error: %s\n", s);
+        printf("CUDA Status: %d Error: %s\n", status, s);
         assert(0);
         snprintf(buffer, 256, "CUDA Error: %s", s);
         error(buffer);
@@ -42,7 +42,7 @@ void check_error(cudaError_t status)
     {   
         const char *s = cudaGetErrorString(status);
         char buffer[256];
-        printf("CUDA Error Prev: %s\n", s);
+        printf("CUDA Prev Status: %d Error: %s\n", status2, s);
         assert(0);
         snprintf(buffer, 256, "CUDA Error Prev: %s", s);
         error(buffer);
