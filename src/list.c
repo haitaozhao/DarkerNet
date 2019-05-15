@@ -54,16 +54,42 @@ void list_insert(list *l, void *val)
 	++l->size;
 }
 
-// 2019/5/8
-void list_bsort(list *l)
+// 2019.05.15
+node* list_index(list* l, int index)
 {
-	int n = l->size;
-
-	for (int i = 0; i < n - 1; i++ ){
-		for (int j = 0; j < n - 1 - i; j++ ){
-			
-		}
+	node* n = l->front;
+	while(index > 0){
+		n = n->next;
+		--index;
 	}
+	return n;
+}
+
+void list_delete(list* l, int index)
+{
+	node* n = list_index(l, index);
+    if(n->next)n->next->prev = n->prev;
+    if(n->prev)n->prev->next = n->next;
+	free_current_node(n);
+	--l->size;
+}
+
+// sorted in ascending order
+void list_bsort(list *l, nodeAttr attr)
+{
+    for (int i = 0; i < l->size - 1; i++ ){
+		int j = l->size - 1 - i;
+		node* n = l->front;
+		while (j > 0){
+			if (attr(n) > attr(n->next)){
+				void* val = n->val;
+				n->val = n->next->val;
+				n->next->val = val;
+			}
+			n = n->next;
+			--j;
+		}
+    }
 }
 
 void free_node(node *n)
@@ -74,6 +100,12 @@ void free_node(node *n)
 		free(n);
 		n = next;
 	}
+}
+
+void free_current_node(node *n)
+{
+	free(n->val);
+	free(n);
 }
 
 void free_list(list *l)
