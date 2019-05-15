@@ -156,7 +156,7 @@ char* layer_type_to_string(LAYER_TYPE lt)
         return "prelu";
     
     default:
-        return BLANK;
+        return "Type not recognized";
     }
 }
 
