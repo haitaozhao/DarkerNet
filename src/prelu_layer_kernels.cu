@@ -12,11 +12,11 @@ extern "C" {
 __global__ void forward_prelu_layer_kernel(int n, int w, int h, int c, int g, float *input, float *weights, float *output)
 {
     int id = (blockIdx.x + blockIdx.y*gridDim.x) * blockDim.x + threadIdx.x;
-    if (id >= n) return;            // 所有通道索引
+    if (id >= n) return;    // 所有通道索引
 
-    int k = id % c;                 // 某张量通道索引
+    int k = id % c;         // 某张量通道索引
     float alpha = weights[k / g];
-    
+
     for(int i = 0; i < h*w; ++i){
         int idx = i + h*w * id;
         float val = input[idx];
@@ -31,9 +31,9 @@ extern "C" void  forward_prelu_layer_gpu(const layer l, network net)
     forward_prelu_layer_kernel<<<cuda_gridsize(n), BLOCK>>>(n, l.w, l.h, l.c, l.groups, net.input_gpu, l.weights_gpu, l.output_gpu);
     check_error(cudaPeekAtLastError());
 }
-#endif
 
-#if 0
+#else
+
 __global__ void prelu_kernel(float *input, float *output, float *alpha, int c, int n, int size)
 {
     int offset = blockIdx.x * blockDim.x + threadIdx.x; // 像素索引
