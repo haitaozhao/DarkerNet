@@ -86,4 +86,5 @@ Based on Darknet.
 - 2019.05.10: add `prelu`.
 - 2019.05.11: OpenBLAS supported.
 - 2019.05.12: add `print_network_weights`, `layer_type_to_string`.
-- 2019.05.13: CUDA supported; add `prelu_layer_kernel.cu`, `clip_cpu/gpu`,
+- 2019.05.13: CUDA supported; add `prelu_layer_kernel.cu`, `clip_cpu/gpu`.
+- 2019.05.15: modify layer typedef, pull cuda output each layer
