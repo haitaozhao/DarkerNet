@@ -31,9 +31,7 @@ extern "C" void  forward_prelu_layer_gpu(const layer l, network net)
     forward_prelu_layer_kernel<<<cuda_gridsize(n), BLOCK>>>(n, l.w, l.h, l.c, l.groups, net.input_gpu, l.weights_gpu, l.output_gpu);
     check_error(cudaPeekAtLastError());
 }
-
 #else
-
 __global__ void prelu_kernel(float *input, float *output, float *alpha, int c, int n, int size)
 {
     int offset = blockIdx.x * blockDim.x + threadIdx.x; // 像素索引
