@@ -108,6 +108,36 @@ void free_current_node(node *n)
 	free(n);
 }
 
+// 2019.05.16
+int list_check(list* l)
+{
+	if (l->size == 0) return -1;// good list
+
+	int index = 0;
+	node* n = l->front;
+	while(n){
+		++index;
+		node* next = n->next;
+
+		if (next){
+			if (next->prev != n) 
+				return index;	// bad list
+		}
+		n = next;
+	}
+	return -1;					// good list
+}
+
+void list_attr(list* l, nodeAttr attr)
+{
+	node* n = l->front;
+	while(n){
+		printf("%f ", attr(n));
+		n = n->next;
+	}
+	printf("\n");
+}
+
 void free_list(list *l)
 {
 	free_node(l->front);

@@ -16,6 +16,10 @@ void list_delete(list* l, int index);
 void list_bsort(list *l, nodeAttr attr);
 void free_current_node(node *n);
 
+// 2019.05.16
+int list_check(list* l);
+void list_attr(list* l, nodeAttr attr);
+
 void free_node(node *n);
 void free_list(list *l);
 void free_list_contents(list *l);
