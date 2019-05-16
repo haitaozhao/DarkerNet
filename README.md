@@ -92,3 +92,4 @@
 - 2019.05.13: CUDA supported; add `prelu_layer_kernel.cu`, `clip_cpu/gpu`.
 - 2019.05.14: modify layer typedef, pull cuda output each layer
 - 2019.05.15: `list_delete`, `list_bsort`, `free_current_node`
+- 2019.05.16: `list_check`, `list_attr`, `copy_image`
