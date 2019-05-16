@@ -14,6 +14,9 @@ extern "C" {
 #endif
 
 #ifdef OPENCV
+#include <opencv/cv.h>
+IplImage *image_to_ipl(image im);
+image ipl_to_image(IplImage* src);
 void *open_video_stream(const char *f, int c, int w, int h, int fps);
 image get_image_from_stream(void *p);
 image load_image_cv(char *filename, int channels);
