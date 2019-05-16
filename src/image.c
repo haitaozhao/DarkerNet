@@ -518,8 +518,11 @@ void copy_image_into(image src, image dest)
 
 image copy_image(image p)
 {
-    image copy = p;
-    copy.data = calloc(p.h*p.w*p.c, sizeof(float));
+    // image copy = p;
+    // copy.data = calloc(p.h*p.w*p.c, sizeof(float));
+    // memcpy(copy.data, p.data, p.h*p.w*p.c*sizeof(float));
+    // return copy;
+    image copy = make_image(p.w, p.h, p.c);
     memcpy(copy.data, p.data, p.h*p.w*p.c*sizeof(float));
     return copy;
 }
