@@ -26,7 +26,7 @@
     git clone https://github.com/xianyi/OpenBLAS.git
     cd OpenBLAS
     make
-    sudo make install   # /usr/local/OpenBLAS
+    sudo make PREFIX=/usr/local/OpenBLAS install
     sudo echo "# >>> openblas >>>" >> ~/.bashrc
     sudo echo "export LD_LIBRARY_PATH=/usr/local/OpenBLAS/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
     sudo echo "# <<< openblas <<<" >> ~/.bashrc
